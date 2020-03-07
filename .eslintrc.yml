@@ -7,9 +7,9 @@ env:
 
 extends:
   - 'airbnb-base'
-  - eslint:recommended
-  - plugin:import/errors
-  - plugin:import/warnings
+  - 'eslint:recommended'
+  - 'plugin:import/errors'
+  - 'plugin:import/warnings'
 
 rules:
   no-console: 0
