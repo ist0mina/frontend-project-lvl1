@@ -19,9 +19,11 @@
   "homepage": "https://github.com/ist0mina/frontend-project-lvl1#readme",
   "bin": {
     "brain-games": "bin/brain-games.js",
-    "brain-even": "bin/brain-even.js"
+    "brain-even": "bin/brain-even.js",
+    "brain-calc": "bin/brain-calc.js"
   },
   "dependencies": {
+    "@hexlet/pairs": "^1.0.11",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
