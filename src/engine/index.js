@@ -47,7 +47,7 @@ export default (rules, conditionPair) => {
     return;
   }
 
-  console.log(rules);  
+  console.log(rules);
 
   const isWin = play(0, conditionPair);
 
