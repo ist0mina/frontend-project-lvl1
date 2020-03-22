@@ -6,4 +6,6 @@
 
 [![Asciinema brain-calc](https://asciinema.org/a/YTUqbOteQ0LabviiFoFV5aWGl)](https://asciinema.org/a/YTUqbOteQ0LabviiFoFV5aWGl)
 
-[![Asciiname brain-gcd](https://asciinema.org/a/Yf4h7rUSzS0K3pmlOqaEjXP4N)](https://asciinema.org/a/Yf4h7rUSzS0K3pmlOqaEjXP4N)
+[![Asciinema brain-gcd](https://asciinema.org/a/Yf4h7rUSzS0K3pmlOqaEjXP4N)](https://asciinema.org/a/Yf4h7rUSzS0K3pmlOqaEjXP4N)
+
+[![Asciinema brain-progression](https://asciinema.org/a/vsLZjgwjLgtNGn3crtzgOWRJi)](https://asciinema.org/a/vsLZjgwjLgtNGn3crtzgOWRJi)
