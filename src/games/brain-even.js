@@ -1,18 +1,14 @@
-import pairs from '@hexlet/pairs';
-import game, { getRandomNumber } from '../engine/index.js';
+import startGame from '../engine/index.js';
+import helpers from '../helpers/index.js';
 
-const { cons } = pairs;
+const { getRandomNumber, isEven, getWrappedResult } = helpers;
 
 const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 const getQuestion = () => getRandomNumber(100);
 
-const isEven = (num) => num % 2 === 0;
-
-const getCorrect = (num) => (isEven(num) ? 'yes' : 'no');
-
-const conditionPair = cons(getQuestion, getCorrect);
+const getCorrect = (num) => getWrappedResult(isEven(num));
 
 export default () => {
-  game(rules, conditionPair);
+  startGame(rules, getQuestion, getCorrect);
 };

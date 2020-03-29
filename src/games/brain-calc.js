@@ -1,7 +1,7 @@
-import pairs from '@hexlet/pairs';
-import game, { getRandomNumber } from '../engine/index.js';
+import starGame from '../engine/index.js';
+import helpers from '../helpers/index.js';
 
-const { cons } = pairs;
+const { getRandomNumber } = helpers;
 
 const rules = 'What is the result of the expression?';
 
@@ -40,14 +40,12 @@ const getCorrect = (question) => {
   const signBehavior = signs.find((behavior) => behavior.sign === sign);
 
   if (signBehavior) {
-    return signBehavior.calculate(+operand1, +operand2).toString();
+    return signBehavior.calculate(+operand1, +operand2);
   }
 
-  return undefined;
+  return null;
 };
 
-const conditionPair = cons(getQuestion, getCorrect);
-
 export default () => {
-  game(rules, conditionPair);
+  starGame(rules, getQuestion, getCorrect);
 };
