@@ -1,14 +1,16 @@
-import startGame from '../engine/index.js';
-import helpers from '../helpers/index.js';
-
-const { getRandomNumber, isEven, getWrappedResult } = helpers;
+import game, { getRandomNumber, createQuestions } from '../index.js';
 
 const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
 
+const countQuestions = 3;
+
+const isEven = (number) => number % 2 === 0;
+
 const getQuestion = () => getRandomNumber(100);
 
-const getCorrect = (num) => getWrappedResult(isEven(num));
+const getCorrect = (num) => (isEven(num) ? 'yes' : 'no');
 
 export default () => {
-  startGame(rules, getQuestion, getCorrect);
+  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
+  game(rules, questions);
 };

@@ -1,16 +1,29 @@
-import startGame from '../engine/index.js';
-import helpers from '../helpers/index.js';
-
-const {
-  getRandomNumber,
-  getProgression,
-  getProgressionValue,
-  getLimitedNumber,
-} = helpers;
+import game, { getRandomNumber, createQuestions } from '../index.js';
 
 const rules = 'What number is missing in the progression?';
 
 const empty = '..';
+
+const countQuestions = 3;
+
+const getProgressionValue = (start, index, diff) => start + index * diff;
+
+const getProgression = () => {
+  const length = 10;
+  const progression = [];
+  const start = getRandomNumber(30);
+  const diff = getRandomNumber(10);
+
+  for (let i = 0; i < length; i += 1) {
+    progression.push(getProgressionValue(start, i, diff));
+  }
+
+  return progression;
+};
+
+const getLimitedNumber = (number, limitation) => (
+  number - Math.floor(number / limitation) * limitation
+);
 
 const getQuestion = () => {
   const progression = getProgression();
@@ -37,5 +50,6 @@ const getCorrect = (question) => {
 };
 
 export default () => {
-  startGame(rules, getQuestion, getCorrect);
+  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
+  game(rules, questions);
 };

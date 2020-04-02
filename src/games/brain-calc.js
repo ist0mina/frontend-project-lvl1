@@ -1,9 +1,8 @@
-import starGame from '../engine/index.js';
-import helpers from '../helpers/index.js';
-
-const { getRandomNumber } = helpers;
+import game, { getRandomNumber, createQuestions } from '../index.js';
 
 const rules = 'What is the result of the expression?';
+
+const countQuestions = 3;
 
 const getOperand = (maxNumber) => getRandomNumber(maxNumber);
 const getSignIndex = () => getRandomNumber(3);
@@ -47,5 +46,6 @@ const getCorrect = (question) => {
 };
 
 export default () => {
-  starGame(rules, getQuestion, getCorrect);
+  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
+  game(rules, questions);
 };

@@ -1,3 +1,3 @@
-import starGame from '../engine/index.js';
+import game from '../index.js';
 
-export default starGame;
+export default game;
