@@ -1,18 +1,22 @@
-import game, { getRandomNumber, createQuestions } from '../index.js';
+import pairs from '@hexlet/pairs';
+import game from '../index.js';
+import utils from '../utils.js';
+
+const { getRandom } = utils;
+
+const { cons } = pairs;
 
 const rules = 'What number is missing in the progression?';
 
 const empty = '..';
-
-const countQuestions = 3;
 
 const getProgressionValue = (start, index, diff) => start + index * diff;
 
 const getProgression = () => {
   const length = 10;
   const progression = [];
-  const start = getRandomNumber(30);
-  const diff = getRandomNumber(10);
+  const start = getRandom(1, 30);
+  const diff = getRandom(1, 9);
 
   for (let i = 0; i < length; i += 1) {
     progression.push(getProgressionValue(start, i, diff));
@@ -27,7 +31,7 @@ const getLimitedNumber = (number, limitation) => (
 
 const getQuestion = () => {
   const progression = getProgression();
-  const index = getRandomNumber(10);
+  const index = getRandom(0, 9);
 
   progression[index] = empty;
 
@@ -50,6 +54,9 @@ const getCorrect = (question) => {
 };
 
 export default () => {
-  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
-  game(rules, questions);
+  game(rules, () => {
+    const question = getQuestion();
+    const correct = getCorrect(question);
+    return cons(question, correct);
+  });
 };

@@ -1,10 +1,18 @@
-import game, { getRandomNumber, createQuestions } from '../index.js';
+import pairs from '@hexlet/pairs';
+import game from '../index.js';
+import utils from '../utils.js';
+
+const { getRandom } = utils;
+
+const { cons } = pairs;
 
 const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-const countQuestions = 3;
-
 const isPrime = (number) => {
+  if (number < 2) {
+    return false;
+  }
+
   if (number % 2 === 0) {
     return number === 2;
   }
@@ -18,11 +26,14 @@ const isPrime = (number) => {
   return divider * divider > number;
 };
 
-const getQuestion = () => getRandomNumber(100);
+const getQuestion = () => getRandom(1, 50);
 
 const getCorrect = (num) => (isPrime(num) ? 'yes' : 'no');
 
 export default () => {
-  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
-  game(rules, questions);
+  game(rules, () => {
+    const question = getQuestion();
+    const correct = getCorrect(question);
+    return cons(question, correct);
+  });
 };

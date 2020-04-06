@@ -1,33 +1,34 @@
-import game, { getRandomNumber, createQuestions } from '../index.js';
+import pairs from '@hexlet/pairs';
+import game from '../index.js';
+import utils from '../utils.js';
+
+const { getRandom } = utils;
+
+const { cons } = pairs;
 
 const rules = 'What is the result of the expression?';
-
-const countQuestions = 3;
-
-const getOperand = (maxNumber) => getRandomNumber(maxNumber);
-const getSignIndex = () => getRandomNumber(3);
 
 const signs = [
   {
     sign: '+',
-    getOperand2: () => getOperand(100),
+    getOperand2: () => getRandom(1, 100),
     calculate: (operand1, operand2) => operand1 + operand2,
   },
   {
     sign: '-',
-    getOperand2: (operand1) => getOperand(operand1),
+    getOperand2: (operand1) => getRandom(0, operand1),
     calculate: (operand1, operand2) => operand1 - operand2,
   },
   {
     sign: '*',
-    getOperand2: () => getOperand(10),
+    getOperand2: () => getRandom(1, 10),
     calculate: (operand1, operand2) => operand1 * operand2,
   },
 ];
 
 const getQuestion = () => {
-  const signIndex = getSignIndex();
-  const operand1 = getOperand(100);
+  const signIndex = getRandom(0, 2);
+  const operand1 = getRandom(1, 100);
   const operand2 = signs[signIndex].getOperand2(operand1);
   return `${operand1} ${signs[signIndex].sign} ${operand2}`;
 };
@@ -46,6 +47,9 @@ const getCorrect = (question) => {
 };
 
 export default () => {
-  const questions = createQuestions(countQuestions, getQuestion, getCorrect);
-  game(rules, questions);
+  game(rules, () => {
+    const question = getQuestion();
+    const correct = getCorrect(question);
+    return cons(question, correct);
+  });
 };

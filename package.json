@@ -11,6 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/ist0mina/frontend-project-lvl1.git"
   },
+  "keywords": [
+    "game",
+    "even",
+    "prime",
+    "gcd",
+    "calc",
+    "progression"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

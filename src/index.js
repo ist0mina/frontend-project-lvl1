@@ -5,25 +5,9 @@ const {
   car,
   cdr,
   isPair,
-  cons,
 } = pairs;
 
-export const getRandomNumber = (num) => Math.floor(Math.random() * num);
-
-export const createQuestions = (count, getQuestion, getCorrect) => {
-  if (typeof getQuestion !== 'function' && typeof getCorrect !== 'function') {
-    return [];
-  }
-
-  const questions = [];
-  for (let i = 0; i < count; i += 1) {
-    const question = getQuestion();
-    const pair = cons(question, getCorrect(question));
-    questions.push(pair);
-  }
-
-  return questions;
-};
+const countRounds = 3;
 
 const getUserName = () => readlineSync.question('May I have your name? ');
 
@@ -32,33 +16,27 @@ const isCorrectAnswer = (answer, correct) => {
   return pefAnswer === correct;
 };
 
-const isValidQuestions = (questions = []) => (
-  questions.length > 0 && questions.every((question) => isPair(question))
-);
+const isValidGame = (rules, getLogic) => rules !== '' && typeof getLogic === 'function' && isPair(getLogic());
 
-const play = (questions) => {
-  if (!isValidQuestions(questions)) {
-    return false;
+const play = (getLogic, round = 0) => {
+  if (round === countRounds) {
+    return true;
   }
 
-  for (let i = 0; i < questions.length; i += 1) {
-    const pair = questions[i];
-    const question = car(pair);
-    const correct = cdr(pair);
+  const pair = getLogic();
+  const question = car(pair);
+  const correct = cdr(pair);
 
-    console.log(`Question: ${question}`);
+  console.log(`Question: ${question}`);
+  const answer = readlineSync.question('Your answer: ');
 
-    const answer = readlineSync.question('Your answer: ');
-
-    if (!isCorrectAnswer(answer, correct)) {
-      console.log(`"${answer}" is wrong answer ;(. Correct answer was "${correct}".`);
-      return false;
-    }
-
+  if (isCorrectAnswer(answer, correct)) {
     console.log('Correct!');
+    return play(getLogic, round + 1);
   }
 
-  return true;
+  console.log(`"${answer}" is wrong answer ;(. Correct answer was "${correct}".`);
+  return false;
 };
 
 const printResult = (isWin, user) => {
@@ -70,20 +48,20 @@ const printResult = (isWin, user) => {
   console.log(`Let's try again, ${user}!`);
 };
 
-const game = (rules = '', questions = []) => {
+const game = (rules = '', getLogic) => {
   console.log('Welcome to the Brain Games!');
 
   const user = getUserName();
 
   console.log(`Hello, ${user}!`);
 
-  if (!isValidQuestions(questions)) {
+  if (!isValidGame(rules, getLogic)) {
     return;
   }
 
   console.log(rules);
 
-  const isWin = play(questions);
+  const isWin = play(getLogic);
 
   printResult(isWin, user);
 };
