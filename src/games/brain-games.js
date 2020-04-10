@@ -1,3 +1,9 @@
-import game from '../index.js';
+import readlineSync from 'readline-sync';
 
-export default game;
+export default () => {
+  console.log('Welcome to the Brain Games!');
+
+  const user = readlineSync.question('May I have your name? ');
+
+  console.log(`Hello, ${user}!`);
+};

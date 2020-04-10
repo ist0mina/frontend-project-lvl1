@@ -1,12 +1,10 @@
 import pairs from '@hexlet/pairs';
 import game from '../index.js';
-import utils from '../utils.js';
-
-const { getRandom } = utils;
+import getRandom from '../utils.js';
 
 const { cons } = pairs;
 
-const rules = 'Find the greatest common divisor of given numbers.';
+const description = 'Find the greatest common divisor of given numbers.';
 
 const isCommonDivider = (divider, numbers = []) => (
   numbers.every((number) => number % divider === 0)
@@ -22,20 +20,13 @@ const getGcd = (...args) => {
   return gcd;
 };
 
-const getQuestion = () => {
+const getLogic = () => {
   const numbers = [getRandom(1, 100), getRandom(1, 100)];
-  return numbers.join(' ');
-};
-
-const getCorrect = (question) => {
-  const numbers = question.split(' ');
-  return getGcd(...numbers);
+  const question = numbers.join(' ');
+  const correct = getGcd(...numbers).toString();
+  return cons(question, correct);
 };
 
 export default () => {
-  game(rules, () => {
-    const question = getQuestion();
-    const correct = getCorrect(question);
-    return cons(question, correct);
-  });
+  game(description, getLogic);
 };
