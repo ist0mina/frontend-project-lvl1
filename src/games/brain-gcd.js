@@ -6,27 +6,21 @@ const { cons } = pairs;
 
 const description = 'Find the greatest common divisor of given numbers.';
 
-const isCommonDivider = (divider, numbers = []) => (
-  numbers.every((number) => number % divider === 0)
-);
-
-const getGcd = (...args) => {
-  let gcd = Math.min(...args);
-
-  while (!isCommonDivider(gcd, [...args]) && gcd > 0) {
-    gcd -= 1;
+const getGcd = (num1, num2) => {
+  if (num2 === 0) {
+    return num1;
   }
-
-  return gcd;
+  return getGcd(num2, num1 % num2);
 };
 
-const getLogic = () => {
-  const numbers = [getRandom(1, 100), getRandom(1, 100)];
-  const question = numbers.join(' ');
-  const correct = getGcd(...numbers).toString();
-  return cons(question, correct);
+const genRoundData = () => {
+  const number1 = getRandom(1, 100);
+  const number2 = getRandom(1, 100);
+  const question = `${number1} ${number2}`;
+  const correctAnswer = getGcd(number1, number2).toString();
+  return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, getLogic);
+  game(description, genRoundData);
 };

@@ -8,12 +8,13 @@ const description = 'Answer "yes" if the number is even, otherwise answer "no".'
 
 const isEven = (number) => number % 2 === 0;
 
-const getLogic = () => {
-  const question = getRandom(1, 100);
-  const correct = isEven(question) ? 'yes' : 'no';
-  return cons(question, correct);
+const genRoundData = () => {
+  const number = getRandom(1, 100);
+  const question = number.toString();
+  const correctAnswer = isEven(number) ? 'yes' : 'no';
+  return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, getLogic);
+  game(description, genRoundData);
 };

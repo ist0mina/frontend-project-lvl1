@@ -8,41 +8,40 @@ const description = 'What is the result of the expression?';
 
 const operations = [
   {
-    sign: '+',
-    operand2: {
-      min: 1,
-      max: 100,
-    },
+    operator: '+',
+    min: 1,
+    max: 100,
     calculate: (operand1, operand2) => operand1 + operand2,
   },
   {
-    sign: '-',
-    operand2: {
-      min: 0,
-      max: 50,
-    },
+    operator: '-',
+    min: 1,
+    max: 50,
     calculate: (operand1, operand2) => operand1 - operand2,
   },
   {
-    sign: '*',
-    operand2: {
-      min: 1,
-      max: 10,
-    },
+    operator: '*',
+    min: 1,
+    max: 10,
     calculate: (operand1, operand2) => operand1 * operand2,
   },
 ];
 
-const getLogic = () => {
-  const index = getRandom(0, 2);
-  const { sign, operand2: { min, max }, calculate } = operations[index];
-  const operand1 = getRandom(1, 100);
+const genRoundData = () => {
+  const indexOperation = getRandom(0, operations.length - 1);
+  const {
+    operator,
+    min,
+    max,
+    calculate,
+  } = operations[indexOperation];
+  const operand1 = getRandom(min, max);
   const operand2 = getRandom(min, max);
-  const question = `${operand1} ${sign} ${operand2}`;
-  const correct = calculate(operand1, operand2).toString();
-  return cons(question, correct);
+  const question = `${operand1} ${operator} ${operand2}`;
+  const correctAnswer = calculate(operand1, operand2).toString();
+  return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, getLogic);
+  game(description, genRoundData);
 };

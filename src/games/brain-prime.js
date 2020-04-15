@@ -24,12 +24,13 @@ const isPrime = (number) => {
   return divider * divider > number;
 };
 
-const getLogic = () => {
-  const question = getRandom(1, 50);
-  const correct = isPrime(question) ? 'yes' : 'no';
-  return cons(question, correct);
+const genRoundData = () => {
+  const number = getRandom(1, 50);
+  const question = number.toString();
+  const correctAnswer = isPrime(question) ? 'yes' : 'no';
+  return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, getLogic);
+  game(description, genRoundData);
 };

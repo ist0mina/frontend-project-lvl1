@@ -19,15 +19,15 @@ const getProgression = () => {
   return progression;
 };
 
-const getLogic = () => {
+const genRoundData = () => {
   const progression = getProgression();
   const index = getRandom(0, 9);
-  const correct = progression[index].toString();
+  const correctAnswer = progression[index].toString();
   progression[index] = '..';
   const question = progression.join(' ');
-  return cons(question, correct);
+  return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, getLogic);
+  game(description, genRoundData);
 };
