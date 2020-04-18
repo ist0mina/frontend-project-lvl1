@@ -1,33 +1,32 @@
 import pairs from '@hexlet/pairs';
-import game from '../index.js';
+import runGame from '../index.js';
 import getRandom from '../utils.js';
 
 const { cons } = pairs;
 
 const description = 'What number is missing in the progression?';
 
-const getProgression = () => {
-  const length = 10;
+const LENGTH_PROGRESSION = 10;
+
+const getProgression = (firstMember, differenсe, length) => {
   const progression = [];
-  const start = getRandom(1, 30);
-  const diff = getRandom(1, 9);
 
   for (let i = 0; i < length; i += 1) {
-    progression.push(start + i * diff);
+    progression.push(firstMember + i * differenсe);
   }
 
   return progression;
 };
 
 const genRoundData = () => {
-  const progression = getProgression();
-  const index = getRandom(0, 9);
-  const correctAnswer = progression[index].toString();
-  progression[index] = '..';
+  const progression = getProgression(getRandom(1, 30), getRandom(1, 9), LENGTH_PROGRESSION);
+  const hiddenMemberIndex = getRandom(0, LENGTH_PROGRESSION - 1);
+  const correctAnswer = progression[hiddenMemberIndex].toString();
+  progression[hiddenMemberIndex] = '..';
   const question = progression.join(' ');
   return cons(question, correctAnswer);
 };
 
 export default () => {
-  game(description, genRoundData);
+  runGame(description, genRoundData);
 };

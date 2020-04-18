@@ -1,5 +1,5 @@
 import pairs from '@hexlet/pairs';
-import game from '../index.js';
+import runGame from '../index.js';
 import getRandom from '../utils.js';
 
 const { cons } = pairs;
@@ -22,5 +22,5 @@ const genRoundData = () => {
 };
 
 export default () => {
-  game(description, genRoundData);
+  runGame(description, genRoundData);
 };
